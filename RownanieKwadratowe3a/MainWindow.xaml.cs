@@ -75,13 +75,44 @@ namespace RownanieKwadratowe3a
                         break;
                 }
                 rownanie.Content = str_a + ((str_b == "") ? "" : " + " + str_b) + ((str_c == "") ? "" : " + " + str_c);
-                delta.Content = obliczanieDelty();
+                delta.Content = "Δ = " + obliczanieDelty().ToString();
                 d = obliczanieDelty();
+                pierw.Content = obliczaniePierwiastkow(d);
+                pq.Content = obliczanieWierzcholka();
             }
         }
         private double obliczanieDelty()
         {
             return Math.Pow(b, 2) - 4 * a * c;
+        }
+        private string obliczaniePierwiastkow(double d)
+        {
+            double x1, x2;
+            string str = "";
+            if (d == 0)
+            {
+                x1 = (-b) / 2 * a;
+                str = "x₀ = " + x1.ToString();
+            }
+            else if (d > 0)
+            {
+                x1 = ((-b) - Math.Sqrt(d)) / 2 * a;
+                x2 = ((-b) + Math.Sqrt(d)) / 2 * a;
+                str = "x₁ = " + x1.ToString() + "; x₂ = " + x2.ToString();
+            }
+            else if (d < 0)
+            {
+                str = "Brak rozwiązań";
+            }
+            return str;
+        }
+        private string obliczanieWierzcholka()
+        {
+            string str = "";
+            double p, q;
+            p = (-b) / 2 * a;
+            q = (-d) / 4 * a;
+            return "p = " + p.ToString() + "; q = " + q.ToString();
         }
     }
 }
